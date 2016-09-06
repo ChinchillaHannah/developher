@@ -1,0 +1,54 @@
+<head>
+  <style>
+  #raindrop {
+    border-style:dotted;
+    border-color:skyblue;
+    height:30px;
+    width: 30px;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+  }
+  </style>
+</head>
+<body>
+
+<h2 id="header"> You have caught 0 raindrops </h2>
+
+<div onclick="clickMe()" id="raindrop" class="rain"> </div>
+<div onclick="clickMe()" id="raindrop" class="rain"> </div>
+<div onclick="clickMe()" id="raindrop" class="rain"> </div>
+<div onclick="clickMe()" id="raindrop" class="rain"> </div>
+<div onclick="clickMe()" id="raindrop" class="rain"> </div>
+
+<script>
+
+var numberOfClicks = 0;
+var randomraindropLeft;
+var currentPosition = 0;
+var header = document.querySelector("#header");
+
+var clickMe = function() {
+  numberOfClicks++;
+  header.innerHTML = "You caught a raindrop! You have caught " + numberOfClicks + " raindrops!";
+}
+
+var rainMove = function(event) {
+  var raindrop = document.getElementsByClassName("rain");
+  var index = 0;
+    while(index < raindrop.length) {
+      raindrop[index].style.top = currentPosition + "px";
+      currentPosition += 10;
+      if (currentPosition > window.innerHeight) {
+        currentPosition = 0;
+        randomraindropLeft = (Math.random() * window.innerWidth);
+        raindrop[index].style.left = randomraindropLeft + "px";
+      }
+      index++;
+    }
+
+}
+
+setInterval(rainMove, 100 );
+</script>
+</body>
